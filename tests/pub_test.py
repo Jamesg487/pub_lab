@@ -1,5 +1,7 @@
 import unittest
 from src.pub import Pub
+from src.drinks import Drinks
+from src.customer import Customer
 
 class TestPub(unittest.TestCase):
 
@@ -15,3 +17,11 @@ class TestPub(unittest.TestCase):
     def test_increase_till(self):
         self.pub.increase_till(2.50)
         self.assertEqual(102.50, self.pub.till)
+
+    def test_customer_buys_drink(self):
+        customer = Customer("Julie", 79.00)
+        drink1 = Drinks("mojito", 9.00)
+        self.pub.increase_till(drink1.price)
+        customer.decrease_wallet(drink1.price)
+        self.assertEqual(70.00, customer.wallet)
+        self.assertEqual(109.00, self.pub.till)
